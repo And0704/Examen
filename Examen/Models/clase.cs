@@ -10,6 +10,6 @@ namespace Examen.Models
         public int product_id { get; set; }
         public string product_name { get; set; }
 
-        public 
+        public string product_description { get; set;
     }
 }
