@@ -11,7 +11,7 @@
         <div class="form-group">
             <label for="cliente">Cliente:</label>
             <select id="cliente">
-                <option>Hernan Galindez</option>
+                <option>Cliente</option>
                 <!-- Añadir más opciones si es necesario -->
             </select>
         </div>
@@ -38,39 +38,347 @@
             </select>
         </div>
 
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Código Producto</th>
-                        <th>Producto</th>
-                        <th>Cantidad</th>
-                        <th>Precio</th>
-                        <th>Descuento</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Monitor</td>
-                        <td>1</td>
-                        <td>152</td>
-                        <td>8.1</td>
-                        <td>143.9</td>
-                    </tr>
-                    <tr>
-                        <td>1020</td>
-                        <td>Estuches de celular</td>
-                        <td>2</td>
-                        <td>20</td>
-                        <td>2.5</td>
-                        <td>17.5</td>
-                    </tr>
-                    <!-- Más filas si es necesario -->
-                </tbody>
-            </table>
+        @{
+
+            ViewBag.Title = "Usuarios";
+
+            Layout = "~/Views/Shared/_Layout.cshtml";
+
+        }
+
+        <ol class="breadcrumb mb-4 mt-4">
+
+            <li class="breadcrumb-item"><a href="index.html">Resumen</a></li>
+
+            <li class="breadcrumb-item active">Usuarios</li>
+
+        </ol>
+
+        <div class="card">
+
+            
+
+            <div class="card-body">
+
+                <div class="row">
+
+                    <div class="col-12">
+
+                        <button type="button" class="btn btn-outline-warning" onclick="abrirModal(null)">Crear Usuario</button>@*comando para el boton*@
+
+                    </div>
+
+                </div>
+
+                <hr />
+
+                <table id="tabla" class="display cell-border" style="width:100%">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Nombres</th>
+
+                            <th>Apellidos</th>
+
+                            <th>Correo</th>
+
+                            <th>Activo</th>
+
+                            <th></th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+                    </tbody>
+
+                </table>
+
+            </div>
+
         </div>
+
+        <!-- Modal -->
+
+        <div class="modal fade" id="FormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+
+                    
+
+                    <div class="modal-body">
+
+                        <input id="txtid" type="text" vakue="0" />
+
+                        <div class="row">
+
+                            <div class="col-sm-6">
+
+                                <label for="txtnombres">Nombres</label>
+
+                                <input type="text" class="form-control" id="txtnombres">
+
+                            </div>
+
+
+                            <div class="col-sm-6">
+
+                                <label for="txtapellidos">Apellidos</label>
+
+                                <input type="text" class="form-control" id="txtapellidos">
+
+                            </div>
+
+
+                            <div class="col-sm-6">
+
+                                <label for="txtcorreo">Correo</label>
+
+                                <input type="text" class="form-control" id="txtcorreo">
+
+                            </div>
+
+                            <div class="col-sm-6">
+
+                                <label for="cboactivo">Activo</label>
+
+                                <select id="cboactivo" class="form-select">
+
+                                    <option value="1">si</option>
+
+                                    <option value="0">no</option>
+
+                                </select>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+
+                        <button type="button" class="btn btn-primary" onclick="Guardar()">Guardar</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        @section scripts {
+
+            <script>
+
+        var tabladata;
+
+        var filaSeleccionada;
+
+        @*jQuery.ajax({
+
+            url: '@Url.Action("ListarUsuarios", "Home")',
+
+            type: "GET",
+
+            dataType: "json",
+
+            contentType: "application/json; charset=utf-8",
+
+            success: function(data) {
+
+                console.log(data);
+
+            },
+
+            error: function(xhr, status, error) {
+
+                console.log("Error: " + error);
+
+            }
+
+        });*@
+
+        tabladata = $("#tabla").DataTable({
+
+            responsive: true,
+
+            ordering: false,
+
+            ajax: {
+
+                url: '@Url.Action("ListarUsuarios", "Home")',
+
+                type: "GET",
+
+                dataType: "json",
+
+            },
+
+            columns: [
+
+                { data: "Nombres" },
+
+                { data: "Apellidos" },
+
+                { data: "Correo" },
+
+                {
+
+                    data: "Activo",
+
+                    render: function (valor) {
+
+                        if (valor) {
+
+                            return '<spam class="badge bg-success">si</span>';
+
+                        } else {
+
+                            return '<spam class="badge bg-danger">no</span>';
+
+                        }
+
+                    }
+
+                }, {
+
+                    "defaultContent": '<button type="button" class="btn btn-primary btn-sm btn-editar"><i class=" fas fa-pen"></i></button>'
+
+                        + '<button type="button" class="btn btn-danger btn-sm"><i class=" fas fa-trash"></i></button>',
+
+                    "ordenable": false,
+
+                    "searchable": false,
+
+                    "Width": "90px"
+
+                }
+
+            ],
+
+            "language": { "url":"//cdn.datatables.net/plug-ins/2.1.4/i18n/es-ES.json"}
+
+        });
+
+        function abrirModal(json) {
+
+            $("#txtid").val(0);
+
+            $("#txtnombres").val("")
+
+            $("#txtapellidos").val("")
+
+            $("#txtcorreo").val("")
+
+            $("#txtactivo").val(1)
+
+
+            if (json != null) {
+
+                $("#txtid").val(json.IdUsuario);
+
+                $("#txtnombres").val(json.Nombres)
+
+                $("#txtapellidos").val(json.Apellidos)
+
+                $("#txtcorreo").val(json.Correo)
+
+                $("#txtactivo").val(json.Activo == true ? 1 : 0)
+
+
+            }
+
+
+            $("#FormModal").modal("show");
+
+        }
+
+        $("#tabla tbody").on("click", '.btn-editar', function () {
+
+            filaSeleccionada = $(this).closest("tr");
+
+            var data = tabladata.row(filaSeleccionada).data();      @*mmuesra los datos de la fila a editar o eliminar*@
+
+            console.log(data)
+
+            abrirModal(data)
+
+
+        })
+
+        function Guardar() {
+
+            var Usuario = {
+
+                IdUsuario: $("#txtid").val(),
+
+                Activo: $("#cboactivo").val() == 1 ? true : false,
+
+                Apellidos: $("#txtapellidos").val(),
+
+                Correo: $("#txtcorreo").val(),
+
+                Nombres: $("#txtnombres").val(),
+
+            }
+
+
+             jQuery.ajax({
+
+                url: '@Url.Action("GuardarUsuario", "Home")',
+
+                type: "POST",
+
+                data: JSON.stringify({ objeto: Usuario}),
+
+                dataType: "json",
+
+                contentType: "application/json; charset=utf-8",
+
+                success: function (data) {
+
+                },
+
+                error: function (error) {
+
+                    console.log(error);
+
+                }
+
+            });
+
+
+            if (Usuario.IdUsuario == 0) {
+
+                tabladata.row.add(Usuario).draw(false);
+
+            } else {
+
+                tabladata.row(filaSeleccionada).data(Usuario).draw(false);
+
+
+            }
+
+            $("#FormModal").modal("hide");
+
+
+        }
+
+            </script>
+
+        }
+
 
         <div class="buttons">
             <button>GUARDAR</button>
