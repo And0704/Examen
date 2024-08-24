@@ -8,6 +8,7 @@
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="~/Content/css/RegistrarStyle.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="container h-100">
@@ -24,7 +25,7 @@
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fas fa-id-card"></i></span>
                             </div>
-                            <input type="text" id="document" name="document" class="form-control input_user" placeholder="Identificación" required>
+                            <input type="text" id="document" name="document" class="form-control input_user" placeholder="Identificación" pattern="\d+" title="Solo números permitidos" required>
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-append">
@@ -55,7 +56,6 @@
                             </div>
                             <select id="store" name="store" class="form-control input_user" required>
                                 <option value="" disabled selected>Tienda</option>
-                                <!-- Aquí deberías agregar dinámicamente las tiendas disponibles desde tu modelo -->
                                 <option value="1">Tienda 1</option>
                                 <option value="2">Tienda 2</option>
                             </select>
