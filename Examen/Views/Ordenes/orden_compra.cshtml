@@ -1,17 +1,81 @@
-﻿@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
-<html>
+﻿<!DOCTYPE html>
+<html lang="es">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Venta</title>
+    
 </head>
 <body>
-    <div>
-    
+    <div class="container">
+        <div class="form-group">
+            <label for="cliente">Cliente:</label>
+            <select id="cliente">
+                <option>Hernan Galindez</option>
+                <!-- Añadir más opciones si es necesario -->
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha">
+        </div>
+        <div class="form-group">
+            <label for="fechaEntrega">Fecha Entrega:</label>
+            <input type="date" id="fechaEntrega">
+        </div>
+        <div class="form-group">
+            <label for="tienda">Tienda:</label>
+            <select id="tienda">
+                <option>Tienda Norte</option>
+                <!-- Añadir más opciones si es necesario -->
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="empleado">Empleado:</label>
+            <select id="empleado">
+                <option>Jorge Chapaca</option>
+                <!-- Añadir más opciones si es necesario -->
+            </select>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código Producto</th>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Descuento</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Monitor</td>
+                        <td>1</td>
+                        <td>152</td>
+                        <td>8.1</td>
+                        <td>143.9</td>
+                    </tr>
+                    <tr>
+                        <td>1020</td>
+                        <td>Estuches de celular</td>
+                        <td>2</td>
+                        <td>20</td>
+                        <td>2.5</td>
+                        <td>17.5</td>
+                    </tr>
+                    <!-- Más filas si es necesario -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="buttons">
+            <button>GUARDAR</button>
+            <button>CANCELAR</button>
+        </div>
     </div>
 </body>
 </html>
