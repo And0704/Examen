@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Venta</title>
-    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container">
@@ -56,18 +56,13 @@
 
         <div class="card">
 
-            
-
             <div class="card-body">
 
                 <div class="row">
-
                     <div class="col-12">
-
-                        <button type="button" class="btn btn-outline-warning" onclick="abrirModal(null)">Crear Usuario</button>@*comando para el boton*@
-
+                        <button type="button" class="btn btn-outline-warning" onclick="abrirModal(null)">Crear Usuario</button>
+                        <button type="button" class="btn btn-outline-info ml-2">Nuevo Botón</button>
                     </div>
-
                 </div>
 
                 <hr />
@@ -109,11 +104,9 @@
 
                 <div class="modal-content">
 
-                    
-
                     <div class="modal-body">
 
-                        <input id="txtid" type="text" vakue="0" />
+                        <input id="txtid" type="text" value="0" />
 
                         <div class="row">
 
@@ -125,7 +118,6 @@
 
                             </div>
 
-
                             <div class="col-sm-6">
 
                                 <label for="txtapellidos">Apellidos</label>
@@ -133,7 +125,6 @@
                                 <input type="text" class="form-control" id="txtapellidos">
 
                             </div>
-
 
                             <div class="col-sm-6">
 
@@ -157,7 +148,6 @@
 
                             </div>
 
-
                         </div>
 
                     </div>
@@ -175,7 +165,6 @@
             </div>
 
         </div>
-
 
         @section scripts {
 
@@ -241,11 +230,11 @@
 
                         if (valor) {
 
-                            return '<spam class="badge bg-success">si</span>';
+                            return '<span class="badge bg-success">si</span>';
 
                         } else {
 
-                            return '<spam class="badge bg-danger">no</span>';
+                            return '<span class="badge bg-danger">no</span>';
 
                         }
 
@@ -281,7 +270,7 @@
 
             $("#txtcorreo").val("")
 
-            $("#txtactivo").val(1)
+            $("#cboactivo").val(1)
 
 
             if (json != null) {
@@ -294,7 +283,7 @@
 
                 $("#txtcorreo").val(json.Correo)
 
-                $("#txtactivo").val(json.Activo == true ? 1 : 0)
+                $("#cboactivo").val(json.Activo == true ? 1 : 0)
 
 
             }
@@ -378,7 +367,6 @@
             </script>
 
         }
-
 
         <div class="buttons">
             <button>GUARDAR</button>
