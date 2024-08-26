@@ -6,7 +6,8 @@ using System.Web.Mvc;
 using System.Data;
 using System.Data.SqlClient;
 using System.Security.Cryptography;
-using Examen.Models;
+
+using Usuario.Models;
 
 namespace Examen.Controllers
 {
